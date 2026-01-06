@@ -1,6 +1,9 @@
 import { Navigate, Route, Routes } from "react-router"
 import Login from "./routes/Login"
 import Dashboard from "./routes/Dashboard"
+import Users from "./routes/Users"
+import Products from "./routes/Products"
+import Orders from "./routes/Orders"
 
 const App = () => {
   return (
@@ -8,6 +11,9 @@ const App = () => {
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/users" element={<Users />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/orders" element={<Orders />} />
     </Routes>
   )
 }
