@@ -13,7 +13,7 @@ const Login = () => {
         e.preventDefault()
         loginMutation.mutate(
         {username, password},
-        {onSuccess: () => navigate('/app')}
+        {onSuccess: () => navigate('/dashboard')}
         )
     }
     
