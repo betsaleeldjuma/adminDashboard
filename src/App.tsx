@@ -1,8 +1,12 @@
+import { Navigate, Route, Routes } from "react-router"
+import Login from "./routes/Login"
+
 const App = () => {
   return (
-    <div>
-      <h1 className="text-3xl underline font-bold">Hello World</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
   )
 }
 
