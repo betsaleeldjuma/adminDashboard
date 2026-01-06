@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const apiShop = axios.create({
+const apiClient = axios.create({
     baseURL: "https://dummyjson.com",
     headers: {"Content-Type": "application/json"}
 })
 
-apiShop.interceptors.request.use((config) => {
+apiClient.interceptors.request.use((config) => {
     const token = localStorage.getItem("token")
 
     if(token) {
@@ -15,15 +15,16 @@ apiShop.interceptors.request.use((config) => {
     return config
 })
 
-apiShop.interceptors.response.use(
+apiClient.interceptors.response.use(
     (response) => response,
     (error) => {
         if(error.response?.status === 401) {
             console.log("Token invalide")
+            window.location.href = "/login"
         }
 
         return Promise.reject(error)
     }
 )
 
-export default apiShop
+export default apiClient
