@@ -9,6 +9,7 @@ import {
 } from "recharts";
 import apiClient from "../api/apiClient";
 import { Link } from "react-router";
+import Loading from "../components/Loading";
 
 /* ==============================
    TYPES
@@ -91,7 +92,7 @@ const Dashboard = () => {
     queryFn: fetchProductsCount,
   });
 
-  if (!users || !carts || !products) return <p>Loading dashboard...</p>;
+  if (!users || !carts || !products) return <div className="flex justify-center items-center w-full h-screen"><Loading /></div>;
 
   /* ==============================
      STATS
