@@ -92,7 +92,7 @@ const Dashboard = () => {
     queryFn: fetchProductsCount,
   });
 
-  if (!users || !carts || !products) return <div className="flex justify-center items-center w-full h-screen"><Loading /></div>;
+  if (!users || !carts || !products) return <div className="flex justify-center items-center w-screen h-screen"><Loading /></div>;
 
   /* ==============================
      STATS
