@@ -115,21 +115,39 @@ const Dashboard = () => {
     <div className="p-6 space-y-6">
       {/* KPI CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Link to='/users'><StatCard title="Total Users" value={totalUsers} /></Link>
-        <Link to='/orders'><StatCard title="Total Orders" value={totalOrders} /></Link>
-        <Link to='/products'><StatCard title="Total Products" value={totalProducts} /></Link>
+        <Link to="/users">
+          <StatCard
+            title="Total Users"
+            value={totalUsers}
+            bgColor="bg-[#8E1616]"
+          />
+        </Link>
+        <Link to="/orders">
+          <StatCard
+            title="Total Orders"
+            value={totalOrders}
+            bgColor="bg-[#8E1616]"
+          />
+        </Link>
+        <Link to="/products">
+          <StatCard
+            title="Total Products"
+            value={totalProducts}
+            bgColor="bg-[#8E1616]"
+          />
+        </Link>
       </div>
 
       {/* GRAPHIC */}
-      <div className="bg-[#3C415C] p-4 pb-10 rounded-xl h-80 w-full">
-        <h2 className="text-white mb-4">Revenue per Order</h2>
+      <div className="bg-[#8E1616] p-4 pb-10 rounded-xl h-80 w-full">
+        <h2 className="text-white mb-4 opacity-70">Revenue by Order</h2>
 
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData}>
-            <XAxis dataKey="name" stroke="#fff" />
-            <YAxis stroke="#fff" />
+            <XAxis dataKey="name" stroke="#EEEEEE" />
+            <YAxis stroke="#EEEEEE" />
             <Tooltip />
-            <Bar dataKey="total" fill="#ff7f50" />
+            <Bar dataKey="total" fill="#1D1616" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -144,11 +162,15 @@ const Dashboard = () => {
 const StatCard = ({
   title,
   value,
+  bgColor = "bg-[#3C415C]", // couleur par défaut
 }: {
   title: string;
   value: number | string;
+  bgColor?: string;
 }) => (
-  <div className="bg-[#3C415C] p-4 rounded-xl text-white">
+  <div
+    className={`${bgColor} p-4 rounded-xl text-white shadow-lg hover:scale-105 transition-transform`}
+  >
     <p className="text-sm opacity-70">{title}</p>
     <h2 className="text-2xl font-bold">{value}</h2>
   </div>
