@@ -140,10 +140,10 @@ const Dashboard = () => {
       </div>
 
       {/* GRAPHIC */}
-      <div className="bg-[#8E1616] p-4 pb-10 rounded-xl h-80 w-full">
+      <div className="bg-[#8E1616] p-4 pb-10 rounded-xl h-55 lg:h-80 w-full">
         <h2 className="text-white mb-4 opacity-70">Revenue by Order</h2>
 
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" aspect={1.5}>
           <BarChart data={chartData}>
             <XAxis dataKey="name" stroke="#EEEEEE" />
             <YAxis stroke="#EEEEEE" />
