@@ -24,6 +24,21 @@ interface CartsResponse {
   total: number;
 }
 
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  age: number;
+  gender: string;
+}
+
+
+interface UsersResponse {
+  users: User[];
+  total: number;
+}
+
 /* ==============================
    API (FETCH)
 ============================== */
@@ -33,26 +48,41 @@ const fetchCarts = async (): Promise<CartsResponse> => {
   return res.data;
 };
 
+const fetchUsers = async (): Promise<UsersResponse> => {
+  const res = await apiClient.get("/users");
+  return res.data;
+};
+
 /* ==============================
    DASHBOARD
 ============================== */
 
 const Dashboard = () => {
-  const { data, isLoading, isError } = useQuery({
+  const cartsQuery = useQuery({
     queryKey: ["dashboard-carts"],
     queryFn: fetchCarts,
   });
 
-  if (isLoading) return <p>Loading dashboard...</p>;
-  if (isError || !data) return <p>Error loading dashboard</p>;
+  const usersQuery = useQuery({
+    queryKey: ["dashboard-users"],
+    queryFn: fetchUsers,
+  });
+
+  if (cartsQuery.isLoading || usersQuery.isLoading)
+    return <p>Loading dashboard...</p>;
+
+  if (cartsQuery.isError || usersQuery.isError || !cartsQuery.data || !usersQuery.data)
+    return <p>Error loading dashboard</p>;
+
+  const { carts, total } = cartsQuery.data;
 
   /* ==============================
      STATS (CALCULS)
   ============================== */
 
-  const totalOrders = data.carts.length;
+  const totalOrders = carts.length;
 
-  const totalRevenue = data.carts.reduce(
+  const totalRevenue = carts.reduce(
     (sum, cart) => sum + cart.total,
     0
   );
@@ -60,11 +90,13 @@ const Dashboard = () => {
   const avgOrderValue =
     totalOrders > 0 ? totalRevenue / totalOrders : 0;
 
+  const totalUsers = usersQuery.data.total;
+
   /* ==============================
      DATA POUR LE GRAPH
   ============================== */
 
-  const chartData = data.carts.map((cart, index) => ({
+  const chartData = carts.map((cart, index) => ({
     name: `Order ${index + 1}`,
     total: cart.total,
   }));
@@ -75,14 +107,15 @@ const Dashboard = () => {
           KPI CARDS
       ============================== */}
 
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 xl:grid-cols-5 gap-4">
         <StatCard title="Total Orders" value={totalOrders} />
         <StatCard title="Revenue" value={`$${totalRevenue}`} />
         <StatCard
           title="Avg Order"
           value={`$${avgOrderValue.toFixed(2)}`}
         />
-        <StatCard title="Carts Count" value={data.total} />
+        <StatCard title="Carts Count" value={total} />
+        <StatCard title="Total Users" value={totalUsers} />
       </div>
 
       {/* ==============================
