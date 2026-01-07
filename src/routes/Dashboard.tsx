@@ -8,21 +8,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import apiClient from "../api/apiClient";
+import { Link } from "react-router";
 
 /* ==============================
    TYPES
 ============================== */
-
-interface Cart {
-  id: number;
-  total: number;
-  totalProducts: number;
-}
-
-interface CartsResponse {
-  carts: Cart[];
-  total: number;
-}
 
 interface User {
   id: number;
@@ -33,24 +23,52 @@ interface User {
   gender: string;
 }
 
-
 interface UsersResponse {
   users: User[];
   total: number;
 }
 
+interface CartProduct {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  total: number;
+}
+
+interface Cart {
+  id: number;
+  userId: number;
+  total: number;
+  totalProducts: number;
+  totalQuantity: number;
+  products: CartProduct[];
+}
+
+interface CartsResponse {
+  carts: Cart[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
 /* ==============================
-   API (FETCH)
+   API FETCH
 ============================== */
 
-const fetchCarts = async (): Promise<CartsResponse> => {
-  const res = await apiClient.get("/carts");
-  return res.data;
+const fetchUsersCount = async (): Promise<number> => {
+  const res = await apiClient.get<UsersResponse>("/users");
+  return res.data.total;
 };
 
-const fetchUsers = async (): Promise<UsersResponse> => {
-  const res = await apiClient.get("/users");
-  return res.data;
+const fetchOrders = async (): Promise<Cart[]> => {
+  const res = await apiClient.get<CartsResponse>("/carts");
+  return res.data.carts;
+};
+
+const fetchProductsCount = async (): Promise<number> => {
+  const res = await apiClient.get("/products");
+  return res.data.total;
 };
 
 /* ==============================
@@ -58,39 +76,30 @@ const fetchUsers = async (): Promise<UsersResponse> => {
 ============================== */
 
 const Dashboard = () => {
-  const cartsQuery = useQuery({
-    queryKey: ["dashboard-carts"],
-    queryFn: fetchCarts,
+  const { data: users } = useQuery({
+    queryKey: ["users-count"],
+    queryFn: fetchUsersCount,
   });
 
-  const usersQuery = useQuery({
-    queryKey: ["dashboard-users"],
-    queryFn: fetchUsers,
+  const { data: carts } = useQuery({
+    queryKey: ["orders-data"],
+    queryFn: fetchOrders,
   });
 
-  if (cartsQuery.isLoading || usersQuery.isLoading)
-    return <p>Loading dashboard...</p>;
+  const { data: products } = useQuery({
+    queryKey: ["products-count"],
+    queryFn: fetchProductsCount,
+  });
 
-  if (cartsQuery.isError || usersQuery.isError || !cartsQuery.data || !usersQuery.data)
-    return <p>Error loading dashboard</p>;
-
-  const { carts, total } = cartsQuery.data;
+  if (!users || !carts || !products) return <p>Loading dashboard...</p>;
 
   /* ==============================
-     STATS (CALCULS)
+     STATS
   ============================== */
 
   const totalOrders = carts.length;
-
-  const totalRevenue = carts.reduce(
-    (sum, cart) => sum + cart.total,
-    0
-  );
-
-  const avgOrderValue =
-    totalOrders > 0 ? totalRevenue / totalOrders : 0;
-
-  const totalUsers = usersQuery.data.total;
+  const totalProducts = products;
+  const totalUsers = users;
 
   /* ==============================
      DATA POUR LE GRAPH
@@ -99,38 +108,28 @@ const Dashboard = () => {
   const chartData = carts.map((cart, index) => ({
     name: `Order ${index + 1}`,
     total: cart.total,
+    products: cart.totalProducts,
   }));
 
   return (
     <div className="p-6 space-y-6">
-      {/* ==============================
-          KPI CARDS
-      ============================== */}
-
-      <div className="grid grid-cols-2 xl:grid-cols-5 gap-4">
-        <StatCard title="Total Orders" value={totalOrders} />
-        <StatCard title="Revenue" value={`$${totalRevenue}`} />
-        <StatCard
-          title="Avg Order"
-          value={`$${avgOrderValue.toFixed(2)}`}
-        />
-        <StatCard title="Carts Count" value={total} />
-        <StatCard title="Total Users" value={totalUsers} />
+      {/* KPI CARDS */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Link to='/users'><StatCard title="Total Users" value={totalUsers} /></Link>
+        <Link to='/orders'><StatCard title="Total Orders" value={totalOrders} /></Link>
+        <Link to='/products'><StatCard title="Total Products" value={totalProducts} /></Link>
       </div>
 
-      {/* ==============================
-          CHART
-      ============================== */}
-
+      {/* GRAPHIC */}
       <div className="bg-[#3C415C] p-4 pb-10 rounded-xl h-80 w-full">
-        <h2 className="text-white mb-4">Orders Revenue</h2>
+        <h2 className="text-white mb-4">Revenue per Order</h2>
 
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData}>
-            <XAxis dataKey="name" />
-            <YAxis />
+            <XAxis dataKey="name" stroke="#fff" />
+            <YAxis stroke="#fff" />
             <Tooltip />
-            <Bar dataKey="total" />
+            <Bar dataKey="total" fill="#ff7f50" />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -139,7 +138,7 @@ const Dashboard = () => {
 };
 
 /* ==============================
-   KPI CARD COMPONENT
+   KPI CARD
 ============================== */
 
 const StatCard = ({
@@ -147,7 +146,7 @@ const StatCard = ({
   value,
 }: {
   title: string;
-  value: string | number;
+  value: number | string;
 }) => (
   <div className="bg-[#3C415C] p-4 rounded-xl text-white">
     <p className="text-sm opacity-70">{title}</p>
