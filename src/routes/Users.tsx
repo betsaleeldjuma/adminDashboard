@@ -46,12 +46,12 @@ const Users = () => {
       ))}
 
       {/* PAGINATION */}
-      <div className="flex gap-4">
-        <button onClick={prev} disabled={page === 1}>
+      <div className="flex items-center gap-4">
+        <button onClick={prev} disabled={page === 1} className="bg-[#8E1616] p-3 rounded-lg">
           Prev
         </button>
         <span>Page {page}</span>
-        <button onClick={next} disabled={page * limit >= data.total}>
+        <button onClick={next} disabled={page * limit >= data.total} className="bg-[#8E1616] p-3 rounded-lg">
           Next
         </button>
       </div>
