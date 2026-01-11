@@ -46,7 +46,7 @@ const Orders = () => {
           <p className="text-sm opacity-70">Total Orders</p>
           <h2 className="text-2xl font-bold">{totalOrders}</h2>
         </div>
-        <div className="bg-[#8E1616] text-white p-4 rounded">
+        <div className="bg-[#EEEEEE] text-[#8E1616] p-4 rounded">
           <p className="text-sm opacity-70">Total Products</p>
           <h2 className="text-2xl font-bold">{totalProducts}</h2>
         </div>
@@ -61,7 +61,7 @@ const Orders = () => {
         {data.data.map((order) => (
           <div
             key={order.id}
-            className="bg-[#8E1616] text-white p-4 rounded flex flex-col gap-2"
+            className="bg-[#EEEEEE] text-[#8E1616] p-4 rounded flex flex-col gap-2"
           >
             <p>
               <span className="font-bold">Order ID:</span> {order.id} |{" "}
