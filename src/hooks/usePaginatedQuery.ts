@@ -1,5 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import type { PaginatedResponse } from "../types/pagination";
 import { fetchPaginated } from "./fetchPaginated";
+
+interface UsePaginatedQueryParams {
+  key: string;
+  endpoint: "/products" | "/users" | "/carts";
+  page: number;
+  limit: number;
+  q?: string;
+  sort?: string;
+}
 
 export const usePaginatedQuery = <T>({
   key,
@@ -8,15 +18,8 @@ export const usePaginatedQuery = <T>({
   limit,
   q,
   sort,
-}: {
-  key: string;
-  endpoint: "/products" | "/users" | "/carts";
-  page: number;
-  limit: number;
-  q?: string;
-  sort?: string;
-}) => {
-  return useQuery({
+}: UsePaginatedQueryParams) => {
+  return useQuery<PaginatedResponse<T>>({
     queryKey: [key, page, q, sort],
     queryFn: () =>
       fetchPaginated<T>({
@@ -26,6 +29,6 @@ export const usePaginatedQuery = <T>({
         q,
         sort,
       }),
-    placeholderData: true,
+    placeholderData: keepPreviousData,
   });
 };

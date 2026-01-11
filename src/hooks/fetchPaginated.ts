@@ -1,6 +1,6 @@
 import apiClient from "../api/apiClient";
 import { parseSort } from "../types/parseStore";
-import { PaginatedResponse } from "../types/pagination";
+import type { PaginatedResponse } from "../types/pagination";
 
 interface FetchParams {
   endpoint: "/products" | "/users" | "/carts";
