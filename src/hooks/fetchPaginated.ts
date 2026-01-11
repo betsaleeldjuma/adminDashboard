@@ -2,12 +2,13 @@ import apiClient from "../api/apiClient";
 import { parseSort } from "../types/parseStore";
 import type { PaginatedResponse } from "../types/pagination";
 
-interface FetchParams {
+export interface FetchParams {
   endpoint: "/products" | "/users" | "/carts";
   page: number;
   limit: number;
   q?: string;
   sort?: string;
+  filter?: string
 }
 
 export const fetchPaginated = async <T>({
