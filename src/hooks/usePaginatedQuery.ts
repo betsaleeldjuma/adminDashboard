@@ -2,25 +2,29 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import type { PaginatedResponse } from "../types/pagination";
 import { fetchPaginated } from "./fetchPaginated";
 
-interface UsePaginatedQueryParams {
+type Endpoints = "/products" | "/users" | "/carts";
+
+interface UsePaginatedQueryParams<E extends Endpoints> {
   key: string;
-  endpoint: "/products" | "/users" | "/carts";
+  endpoint: E;
   page: number;
   limit: number;
   q?: string;
   sort?: string;
+  filter?: string;
 }
 
-export const usePaginatedQuery = <T>({
+export const usePaginatedQuery = <T, E extends Endpoints>({
   key,
   endpoint,
   page,
   limit,
   q,
   sort,
-}: UsePaginatedQueryParams) => {
+  filter,
+}: UsePaginatedQueryParams<E>) => {
   return useQuery<PaginatedResponse<T>>({
-    queryKey: [key, page, q, sort],
+    queryKey: [key, page, q, sort, filter],
     queryFn: () =>
       fetchPaginated<T>({
         endpoint,
@@ -28,6 +32,7 @@ export const usePaginatedQuery = <T>({
         limit,
         q,
         sort,
+        filter,
       }),
     placeholderData: keepPreviousData,
   });

@@ -11,18 +11,14 @@ const Products = () => {
 
   const { page, limit, next, prev } = usePagination(10);
 
-  const {
-    data,
-    isLoading,
-    isError,
-  } = usePaginatedQuery<Product>({
-    key: "products",
-    endpoint: "/products",
-    page,
-    limit,
-    q: search,
-    sort: "name_asc",
-  });
+  const { data, isLoading, isError } = usePaginatedQuery<Product, "/products">({
+  key: "products",
+  endpoint: "/products",
+  page,
+  limit,
+  q: search,
+  sort: "price_desc",
+});
 
   if (isLoading)
     return (
