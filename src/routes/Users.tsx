@@ -2,6 +2,9 @@ import { usePaginatedQuery } from "../hooks/usePaginatedQuery"
 import type { User } from "../types/user"
 import { usePagination } from "../hooks/usePagination"
 import { useState } from "react"
+import ErrorState from "../components/ErrorState"
+import EmptyState from "../components/EmptyState"
+import Loading from "../components/Loading"
 
 const Users = () => {
   const { page, limit, next, prev } = usePagination(10)
@@ -16,9 +19,26 @@ const Users = () => {
     sort: "name_asc",
   })
 
-  if (isLoading) return <p>Loading users...</p>
-  if (error) return <p>Error loading users</p>
-  if (!data) return <p>No users found</p>
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <Loading />
+      </div>
+    );
+
+  if (error || !data)
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <ErrorState />
+      </div>
+    );
+
+  if (data.data.length === 0)
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <EmptyState />
+      </div>
+    );
 
   return (
     <div className="p-5 flex flex-col gap-4">

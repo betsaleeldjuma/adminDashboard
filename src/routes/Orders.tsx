@@ -1,3 +1,6 @@
+import EmptyState from "../components/EmptyState";
+import ErrorState from "../components/ErrorState";
+import Loading from "../components/Loading";
 import { usePaginatedQuery } from "../hooks/usePaginatedQuery";
 import { usePagination } from "../hooks/usePagination";
 import type { Cart, CartProduct } from "../types/cart"; // créer types
@@ -16,9 +19,26 @@ const Orders = () => {
     sort: "id_asc",
   });
 
-  if (isLoading) return <p>Loading orders...</p>;
-  if (error) return <p>Error loading orders</p>;
-  if (!data) return <p>No orders found</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <Loading />
+      </div>
+    );
+
+  if (error || !data)
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <ErrorState />
+      </div>
+    );
+
+  if (data.data.length === 0)
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <EmptyState />
+      </div>
+    );
 
   // KPI
   const totalOrders = data.total;

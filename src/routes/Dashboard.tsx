@@ -114,6 +114,8 @@ const Dashboard = () => {
 
   return (
     <div className="p-6 space-y-6">
+      {/* BANNER */}
+      <h1 className="text-3xl font-extrabold">ADMIN</h1>
       {/* KPI CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Link to="/users">
