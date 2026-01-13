@@ -33,19 +33,28 @@ const UserNew = () => {
       <h1 className="text-2xl font-bold mb-4">New User</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {/* AVATAR */}
-        <div className="flex items-center gap-4">
+        {/* AVATAR avec overlay */}
+        <label className="flex justify-center items-center gap-8">
           <img
             src={preview ?? "/avatar-placeholder.png"}
+            alt="User avatar"
             className="w-20 h-20 rounded-full object-cover border"
           />
 
+          {/* Overlay */}
+          
+          <p><span className="text-white text-xl font-extrabold uppercase">Add</span></p>
+          
+
+          {/* Input caché */}
           <input
             type="file"
             accept="image/*"
+            className="hidden"
             onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
           />
-        </div>
+        </label>
+
 
         <input
           placeholder="First name"
