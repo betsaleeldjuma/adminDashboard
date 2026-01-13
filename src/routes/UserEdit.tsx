@@ -2,6 +2,8 @@ import { useParams } from "react-router"
 import { useState, useEffect } from "react"
 import { useImagePreview } from "../hooks/useImagePreview"
 import apiClient from "../api/apiClient" // ton axios/fetch wrapper
+import ErrorState from "../components/ErrorState"
+import Loading from "../components/Loading"
 
 const UserEdit = () => {
   const { id } = useParams<{ id: string }>()
@@ -58,12 +60,23 @@ const UserEdit = () => {
 
     apiClient
       .put(`/users/${id}`, formData)
-      .then(() => alert("Utilisateur mis à jour !"))
+      .then(() => alert("Utilisateur Update !"))
       .catch((err) => console.error("Update failed:", err))
   }
 
-  if (loading) return <p>Chargement...</p>
-  if (error) return <p className="text-red-600">{error}</p>
+  if (loading)
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <Loading />
+      </div>
+    )
+
+  if (error)
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <ErrorState />
+      </div>
+    )
 
   return (
     <div className="p-5 max-w-xl mx-auto">
