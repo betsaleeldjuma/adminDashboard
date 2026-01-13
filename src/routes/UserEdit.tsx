@@ -1,6 +1,7 @@
 import { useParams } from "react-router"
 import { useState, useEffect } from "react"
 import { useImagePreview } from "../hooks/useImagePreview"
+import apiClient from "../api/apiClient" // ton axios/fetch wrapper
 
 const UserEdit = () => {
   const { id } = useParams<{ id: string }>()
@@ -12,14 +13,38 @@ const UserEdit = () => {
     gender: "",
     image: "", // URL existante
   })
-
   const [imageFile, setImageFile] = useState<File | null>(null)
   const preview = useImagePreview(imageFile, form.image)
 
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // GET user
   useEffect(() => {
-    // GET /users/:id
-    // api.get(`/users/${id}`).then(res => setForm(res.data))
-  }, [id])
+  if (!id) return
+
+  const numericId = Number(id)
+  if (isNaN(numericId)) {
+    setError("ID utilisateur invalide")
+    setLoading(false)
+    return
+  }
+
+  const fetchUser = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+      const res = await apiClient.get(`/users/${numericId}`)
+      setForm((prev) => ({ ...prev, ...res.data }))
+    } catch {
+      setError("Impossible de récupérer l'utilisateur.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  fetchUser()
+}, [id])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,54 +54,74 @@ const UserEdit = () => {
       if (key !== "image") formData.append(key, value)
     })
 
-    if (imageFile) {
-      formData.append("image", imageFile)
-    }
+    if (imageFile) formData.append("image", imageFile)
 
-    // PUT /users/:id
-    console.log("UPDATE USER", id, formData)
+    apiClient
+      .put(`/users/${id}`, formData)
+      .then(() => alert("Utilisateur mis à jour !"))
+      .catch((err) => console.error("Update failed:", err))
   }
+
+  if (loading) return <p>Chargement...</p>
+  if (error) return <p className="text-red-600">{error}</p>
 
   return (
     <div className="p-5 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Edit User</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {/* AVATAR */}
-        <div className="flex items-center gap-4">
+        {/* AVATAR avec overlay */}
+        <label className="relative w-20 h-20 cursor-pointer group">
           <img
-            src={preview ?? "/avatar-placeholder.png"}
+            src={preview || "/avatar-placeholder.png"}
+            alt="User avatar"
             className="w-20 h-20 rounded-full object-cover border"
+            loading="eager"
           />
-
+          <div className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <span className="text-white text-sm font-medium">Upload</span>
+          </div>
           <input
             type="file"
             accept="image/*"
+            className="hidden"
             onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
           />
-        </div>
+        </label>
 
         <input
           value={form.firstName}
-          onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+          onChange={(e) =>
+            setForm((prev) => ({ ...prev, firstName: e.target.value }))
+          }
           className="border p-2 rounded"
+          placeholder="First Name"
         />
 
         <input
           value={form.lastName}
-          onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+          onChange={(e) =>
+            setForm((prev) => ({ ...prev, lastName: e.target.value }))
+          }
           className="border p-2 rounded"
+          placeholder="Last Name"
         />
 
         <input
           value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
+          onChange={(e) =>
+            setForm((prev) => ({ ...prev, email: e.target.value }))
+          }
           className="border p-2 rounded"
+          placeholder="Email"
+          type="email"
         />
 
         <select
           value={form.gender}
-          onChange={(e) => setForm({ ...form, gender: e.target.value })}
+          onChange={(e) =>
+            setForm((prev) => ({ ...prev, gender: e.target.value }))
+          }
           className="border p-2 rounded"
         >
           <option value="">Select gender</option>
@@ -84,9 +129,7 @@ const UserEdit = () => {
           <option value="female">Female</option>
         </select>
 
-        <button className="bg-[#8E1616] text-white p-3 rounded">
-          Save
-        </button>
+        <button className="bg-[#8E1616] text-white p-3 rounded">Save</button>
       </form>
     </div>
   )

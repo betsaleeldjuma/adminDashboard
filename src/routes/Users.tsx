@@ -82,6 +82,10 @@ const Users = () => {
         </select>
       </div>
 
+      <div>
+        <Link to='/users/new'>New User</Link>
+      </div>
+
       {/* LIST */}
       {data.data.map((user) => (
         <div
@@ -89,7 +93,7 @@ const Users = () => {
           className="bg-[#8E1616] text-white p-5 w-[100%] rounded"
         >
           <img
-            src={user.image}
+            src={user.image || "/avatar-placeholder.png"}
             onError={(e) => (e.currentTarget.src = "/avatar-placeholder.png")}
             loading="lazy"
             alt={`${user.firstName} ${user.lastName}`}
@@ -99,9 +103,10 @@ const Users = () => {
           </p>
           <p className="opacity-70">{user.email}</p>
           <p className="opacity-70">Gender: {user.gender}</p>
-          <Link to="/users/:id/edit">Edit</Link>
+          <Link to={`/users/${user.id}/edit`}>Edit</Link>
         </div>
       ))}
+
 
       {/* PAGINATION */}
       <div className="flex items-center gap-4 mt-4">

@@ -5,6 +5,7 @@ import Users from "./routes/Users"
 import Products from "./routes/Products"
 import Orders from "./routes/Orders"
 import UserNew from "./routes/UserNew"
+import UserEdit from "./routes/UserEdit"
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/users" element={<Users />} />
       <Route path="/users/new" element={<UserNew />} />
-      <Route path="/users/:id/edit" element={<UserNew />} />
+      <Route path="/users/:id/edit" element={<UserEdit />} />
       <Route path="/products" element={<Products />} />
       <Route path="/orders" element={<Orders />} />
     </Routes>
