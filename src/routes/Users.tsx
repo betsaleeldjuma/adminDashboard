@@ -5,6 +5,7 @@ import { useState } from "react"
 import ErrorState from "../components/ErrorState"
 import EmptyState from "../components/EmptyState"
 import Loading from "../components/Loading"
+import { Link } from "react-router"
 
 const Users = () => {
   const { page, limit, next, prev } = usePagination(10)
@@ -98,6 +99,7 @@ const Users = () => {
           </p>
           <p className="opacity-70">{user.email}</p>
           <p className="opacity-70">Gender: {user.gender}</p>
+          <Link to="/users/:id/edit">Edit</Link>
         </div>
       ))}
 
