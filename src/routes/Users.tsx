@@ -87,6 +87,12 @@ const Users = () => {
           key={user.id}
           className="bg-[#8E1616] text-white p-5 w-[100%] rounded"
         >
+          <img
+            src={user.image}
+            onError={(e) => (e.currentTarget.src = "/avatar-placeholder.png")}
+            loading="lazy"
+            alt={`${user.firstName} ${user.lastName}`}
+          />
           <p className="font-bold">
             {user.firstName} {user.lastName}
           </p>
