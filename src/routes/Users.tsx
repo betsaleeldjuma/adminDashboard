@@ -83,27 +83,29 @@ const Users = () => {
       </div>
 
       <div>
-        <Link to='/users/new'>New User</Link>
+        <Link to='/users/new' className="bg-[#EEEEEE] text-[#8E1616] p-3 w-full rounded-lg">New User</Link>
       </div>
 
       {/* LIST */}
       {data.data.map((user) => (
         <div
           key={user.id}
-          className="bg-[#8E1616] text-white p-5 w-[100%] rounded"
+          className="bg-[#8E1616] text-white p-5 w-[100%] rounded flex flex-col lg:flex-row gap-2"
         >
           <img
             src={user.image || "/avatar-placeholder.png"}
             onError={(e) => (e.currentTarget.src = "/avatar-placeholder.png")}
             loading="lazy"
             alt={`${user.firstName} ${user.lastName}`}
+            width={100}
+            height={60}
           />
           <p className="font-bold">
             {user.firstName} {user.lastName}
           </p>
           <p className="opacity-70">{user.email}</p>
           <p className="opacity-70">Gender: {user.gender}</p>
-          <Link to={`/users/${user.id}/edit`}>Edit</Link>
+          <Link to={`/users/${user.id}/edit`} className="bg-[#EEEEEE] text-[#8E1616] p-3 w-full rounded-lg">Edit</Link>
         </div>
       ))}
 
