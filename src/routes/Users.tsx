@@ -105,7 +105,7 @@ const Users = () => {
           </p>
           <p className="opacity-70">{user.email}</p>
           <p className="opacity-70">Gender: {user.gender}</p>
-          <Link to={`/users/${user.id}/edit`} className="bg-[#EEEEEE] text-[#8E1616] p-3 rounded-lg">Edit</Link>
+          <Link to={`/users/${user.id}/edit`} className="p-4 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition">Edit</Link>
         </div>
       ))}
 

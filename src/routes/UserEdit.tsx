@@ -79,71 +79,73 @@ const UserEdit = () => {
     )
 
   return (
-    <div className="card p-5 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Edit User</h1>
+    <div className="w-full h-screen flex justify-center items-center">
+      <div className="card flex flex-col p-5 max-w-2xl w-[60%] justify-center mx-auto">
+        <h1 className="text-2xl font-bold mb-4">Edit User</h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {/* AVATAR avec overlay */}
-        <label className="relative w-20 h-20 cursor-pointer group">
-          <img
-            src={preview || "/avatar-placeholder.png"}
-            alt="User avatar"
-            className="w-20 h-20 rounded-full object-cover border"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <span className="text-white text-sm font-medium">Upload</span>
-          </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* AVATAR avec overlay */}
+          <label className="relative w-20 h-20 cursor-pointer group">
+            <img
+              src={preview || "/avatar-placeholder.png"}
+              alt="User avatar"
+              className="w-20 h-20 rounded-full object-cover border"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="text-white text-sm font-medium">Upload</span>
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
+            />
+          </label>
+
           <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
+            value={form.firstName}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, firstName: e.target.value }))
+            }
+            className="border p-2 rounded"
+            placeholder="First Name"
           />
-        </label>
 
-        <input
-          value={form.firstName}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, firstName: e.target.value }))
-          }
-          className="border p-2 rounded"
-          placeholder="First Name"
-        />
+          <input
+            value={form.lastName}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, lastName: e.target.value }))
+            }
+            className="border p-2 rounded"
+            placeholder="Last Name"
+          />
 
-        <input
-          value={form.lastName}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, lastName: e.target.value }))
-          }
-          className="border p-2 rounded"
-          placeholder="Last Name"
-        />
+          <input
+            value={form.email}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, email: e.target.value }))
+            }
+            className="border p-2 rounded"
+            placeholder="Email"
+            type="email"
+          />
 
-        <input
-          value={form.email}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, email: e.target.value }))
-          }
-          className="border p-2 rounded"
-          placeholder="Email"
-          type="email"
-        />
+          <select
+            value={form.gender}
+            onChange={(e) =>
+              setForm((prev) => ({ ...prev, gender: e.target.value }))
+            }
+            className="border p-2 rounded"
+          >
+            <option value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
 
-        <select
-          value={form.gender}
-          onChange={(e) =>
-            setForm((prev) => ({ ...prev, gender: e.target.value }))
-          }
-          className="border p-2 rounded"
-        >
-          <option value="">Select gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-
-        <button className="bg-[#8E1616] text-white p-3 rounded">Save</button>
-      </form>
+          <button className="w-[100%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition">Save</button>
+        </form>
+      </div>
     </div>
   )
 }
