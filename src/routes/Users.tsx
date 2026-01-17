@@ -53,7 +53,7 @@ const Users = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search user..."
-        className="border p-2 rounded mb-2"
+        className="card border p-2 rounded mb-2"
       />
 
       {/* TRI & FILTRE */}
@@ -115,7 +115,7 @@ const Users = () => {
         <button
           onClick={prev}
           disabled={page === 1}
-          className="bg-[#EEEEEE] text-[#8E1616] p-3 rounded-lg"
+          className="w-[100%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition"
         >
           Prev
         </button>
@@ -123,7 +123,7 @@ const Users = () => {
         <button
           onClick={next}
           disabled={page * limit >= data.total}
-          className="bg-[#EEEEEE] text-[#8E1616] p-3 rounded-lg"
+          className="w-[100%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition"
         >
           Next
         </button>

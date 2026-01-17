@@ -107,14 +107,14 @@ const Orders = () => {
 
       {/* PAGINATION */}
       <div className="flex gap-4 mt-4">
-        <button onClick={prev} disabled={page === 1} className="p-2 bg-[#8E1616] text-white rounded">
+        <button onClick={prev} disabled={page === 1} className="w-[100%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition">
           Prev
         </button>
         <span className="self-center">Page {page}</span>
         <button
           onClick={next}
           disabled={page * limit >= data.total}
-          className="p-2 bg-[#8E1616] text-white rounded"
+          className="w-[100%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition"
         >
           Next
         </button>

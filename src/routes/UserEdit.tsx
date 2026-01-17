@@ -80,7 +80,7 @@ const UserEdit = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <div className="card flex flex-col p-5 max-w-2xl w-[60%] justify-center mx-auto">
+      <div className="card flex flex-col p-5 max-w-2xl w-[90%] lg:w-[60%] justify-center mx-auto">
         <h1 className="text-2xl font-bold mb-4">Edit User</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

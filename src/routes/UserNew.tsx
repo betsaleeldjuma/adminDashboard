@@ -30,7 +30,7 @@ const UserNew = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      <div className="card p-5 max-w-xl w-[40%] mx-auto">
+      <div className="card p-5 max-w-2xl w-[90%] lg:w-[60%] mx-auto">
         <h1 className="text-2xl font-bold mb-4">New User</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

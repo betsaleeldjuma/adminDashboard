@@ -77,7 +77,7 @@ const Products = () => {
         <button
           onClick={prev}
           disabled={page === 0}
-          className="px-4 py-2 bg-[#8E1616] text-white rounded"
+          className="w-[100%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition"
         >
           Prev
         </button>
@@ -85,7 +85,7 @@ const Products = () => {
         <button
           onClick={next}
           disabled={(page + 1) * limit >= data.total}
-          className="px-4 py-2 bg-[#8E1616] text-white rounded"
+          className="w-[100%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition"
         >
           Next
         </button>
