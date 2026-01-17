@@ -123,18 +123,21 @@ const Dashboard = () => {
           <StatCard
             title="Total Users"
             value={totalUsers}
+            bgColor="bg-black"
           />
         </Link>
         <Link to="/orders">
           <StatCard
             title="Total Orders"
             value={totalOrders}
+            bgColor="bg-black"
           />
         </Link>
         <Link to="/products">
           <StatCard
             title="Total Products"
             value={totalProducts}
+            bgColor="bg-black"
           />
         </Link>
       </div>

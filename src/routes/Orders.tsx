@@ -55,20 +55,20 @@ const Orders = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search orders..."
-        className="border p-2 rounded"
+        className="card border p-3 rounded"
       />
 
       {/* KPI */}
       <div className="grid grid-row-3 gap-4 my-4">
-        <div className="bg-[#8E1616] text-white p-4 rounded">
+        <div className="card bg-[#8E1616] p-4 rounded">
           <p className="text-sm opacity-70">Total Orders</p>
           <h2 className="text-2xl font-bold">{totalOrders}</h2>
         </div>
-        <div className="bg-[#EEEEEE] text-[#8E1616] p-4 rounded">
+        <div className="card bg-[#EEEEEE] p-4 rounded">
           <p className="text-sm opacity-70">Total Products</p>
           <h2 className="text-2xl font-bold">{totalProducts}</h2>
         </div>
-        <div className="bg-[#8E1616] text-white p-4 rounded">
+        <div className="card bg-[#8E1616] p-4 rounded">
           <p className="text-sm opacity-70">Total Revenue</p>
           <h2 className="text-2xl font-bold">${totalRevenue}</h2>
         </div>
