@@ -10,6 +10,7 @@ import {
 import apiClient from "../api/apiClient";
 import { Link } from "react-router";
 import Loading from "../components/Loading";
+// import StatCard from "../components/StatCard";
 
 /* ==============================
    TYPES
@@ -122,21 +123,18 @@ const Dashboard = () => {
           <StatCard
             title="Total Users"
             value={totalUsers}
-            bgColor="bg-[#8E1616]"
           />
         </Link>
         <Link to="/orders">
           <StatCard
             title="Total Orders"
             value={totalOrders}
-            bgColor="bg-[#8E1616]"
           />
         </Link>
         <Link to="/products">
           <StatCard
             title="Total Products"
             value={totalProducts}
-            bgColor="bg-[#8E1616]"
           />
         </Link>
       </div>
