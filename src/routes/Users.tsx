@@ -90,7 +90,7 @@ const Users = () => {
       {data.data.map((user) => (
         <div
           key={user.id}
-          className="bg-[#8E1616] text-white p-5 w-[100%] rounded flex flex-col lg:flex-row lg:justify-evenly lg:items-center gap-2"
+          className="card bg-[#8E1616] p-5 w-[100%] rounded flex flex-col lg:flex-row lg:justify-evenly lg:items-center gap-2"
         >
           <img
             src={user.image || "/avatar-placeholder.png"}

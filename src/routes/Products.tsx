@@ -62,7 +62,7 @@ const Products = () => {
         {data.data.map((product) => (
           <div
             key={product.id}
-            className="bg-[#8E1616] flex justify-between rounded-lg p-4"
+            className="card bg-[#8E1616] flex justify-between rounded-lg p-4"
           >
             <h1 className="font-bold lg:text-2xl">
               {product.title}

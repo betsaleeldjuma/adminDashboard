@@ -29,7 +29,7 @@ const UserNew = () => {
   }
 
   return (
-    <div className="p-5 max-w-xl mx-auto">
+    <div className="card p-5 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">New User</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

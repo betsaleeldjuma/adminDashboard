@@ -79,7 +79,7 @@ const Orders = () => {
         {data.data.map((order) => (
           <div
             key={order.id}
-            className="bg-[#EEEEEE] text-[#8E1616] p-4 rounded flex flex-col gap-2"
+            className="card bg-[#EEEEEE] p-4 rounded flex flex-col gap-2"
           >
             <p>
               <span className="font-bold">Order ID:</span> {order.id} |{" "}

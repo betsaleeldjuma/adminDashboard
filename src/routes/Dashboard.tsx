@@ -118,7 +118,7 @@ const Dashboard = () => {
       <h1 className="text-3xl font-extrabold">ADMIN</h1>
       {/* KPI CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Link to="/users">
+        <Link to="/users" className="card">
           <StatCard
             title="Total Users"
             value={totalUsers}
@@ -142,13 +142,13 @@ const Dashboard = () => {
       </div>
 
       {/* GRAPHIC */}
-      <div className="bg-[#8E1616] p-4 pb-10 rounded-xl h-55 lg:h-90 w-full">
+      <div className="card bg-[#8E1616] p-4 pb-10 rounded-xl h-55 lg:h-90 w-full">
         <h2 className="text-white mb-4 opacity-70">Revenue by Order</h2>
 
         <ResponsiveContainer width="100%" height='100%'>
           <BarChart data={chartData}>
-            <XAxis dataKey="name" stroke="#EEEEEE" />
-            <YAxis stroke="#EEEEEE" />
+            <XAxis dataKey="name" stroke="#000000ff" />
+            <YAxis stroke="#000000ff" />
             <Tooltip />
             <Bar dataKey="total" fill="#1D1616" />
           </BarChart>
