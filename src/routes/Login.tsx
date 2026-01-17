@@ -19,7 +19,7 @@ const Login = () => {
     
   return (
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-4 w-screen h-screen">
-      <div className="flex flex-col justify-center items-center gap-4 w-[80%] h-[60%] bg-[#8E1616] rounded-lg shadow-lg">
+      <div className="flex flex-col justify-center items-center gap-4 w-[80%] lg:w-[40%] h-[60%] bg-[#8E1616] rounded-lg shadow-lg">
         <label className="text-xl font-bold">Name:</label>
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="border p-2 w-[40%] rounded-sm"/>
         <label className="text-xl font-bold">Password:</label>

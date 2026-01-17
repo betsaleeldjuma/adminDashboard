@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 body {
-  background-color: #1D1616;
+  background-image: url('https://i.pinimg.com/736x/b0/a3/e1/b0a3e1af7dd1724159d14e251036e962.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #EEEEEE;
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
