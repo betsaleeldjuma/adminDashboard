@@ -25,21 +25,21 @@ const Products = () => {
       <div className="flex justify-center items-center w-screen h-screen">
         <Loading />
       </div>
-    );
+    )
 
   if (isError || !data)
     return (
       <div className="flex justify-center items-center w-screen h-screen">
         <ErrorState />
       </div>
-    );
+    )
 
   if (data.data.length === 0)
     return (
-      <div className="flex justify-center items-center w-screen h-screen">
+      <div className="flex justify-center items-center w-screen h-screen lg:w-[50%] lg:h-[50%]">
         <EmptyState />
       </div>
-    );
+    )
 
   return (
     <div className="flex flex-col gap-4 p-5">

@@ -22,21 +22,21 @@ const Orders = () => {
       <div className="flex justify-center items-center w-screen h-screen">
         <Loading />
       </div>
-    );
+    )
 
   if (error || !data)
     return (
       <div className="flex justify-center items-center w-screen h-screen">
         <ErrorState />
       </div>
-    );
+    )
 
   if (data.data.length === 0)
     return (
       <div className="flex justify-center items-center w-screen h-screen">
         <EmptyState />
       </div>
-    );
+    )
 
   // KPI
   const totalOrders = data.total;
