@@ -29,65 +29,67 @@ const UserNew = () => {
   }
 
   return (
-    <div className="card p-5 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">New User</h1>
+    <div className="w-full h-screen flex justify-center items-center">
+      <div className="card p-5 max-w-xl w-[40%] mx-auto">
+        <h1 className="text-2xl font-bold mb-4">New User</h1>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {/* AVATAR avec overlay */}
-        <label className="flex justify-center items-center gap-8">
-          <img
-            src={preview ?? "/avatar-placeholder.png"}
-            alt="User avatar"
-            className="w-20 h-20 rounded-full object-cover border"
-          />
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {/* AVATAR avec overlay */}
+          <label className="flex justify-center items-center gap-8">
+            <img
+              src={preview ?? "/avatar-placeholder.png"}
+              alt="Update"
+              className="w-20 h-20 rounded-full flex items-center justify-center object-cover border"
+            />
 
-          {/* Overlay */}
-          
-          <p><span className="text-white text-xl font-extrabold uppercase">Add</span></p>
-          
+            {/* Overlay */}
+            
+            <p><span className="text-xl font-extrabold uppercase">Add the picture</span></p>
+            
 
-          {/* Input caché */}
+            {/* Input caché */}
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
+            />
+          </label>
+
+
           <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={(e) => setImageFile(e.target.files?.[0] ?? null)}
+            placeholder="First name"
+            onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+            className="border p-2 rounded"
           />
-        </label>
 
+          <input
+            placeholder="Last name"
+            onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+            className="border p-2 rounded"
+          />
 
-        <input
-          placeholder="First name"
-          onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-          className="border p-2 rounded"
-        />
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            className="border p-2 rounded"
+          />
 
-        <input
-          placeholder="Last name"
-          onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-          className="border p-2 rounded"
-        />
+          <select
+            onChange={(e) => setForm({ ...form, gender: e.target.value })}
+            className="border p-2 rounded"
+          >
+            <option value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
 
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="border p-2 rounded"
-        />
-
-        <select
-          onChange={(e) => setForm({ ...form, gender: e.target.value })}
-          className="border p-2 rounded"
-        >
-          <option value="">Select gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-
-        <button className="bg-[#8E1616] text-white p-3 rounded">
-          Create
-        </button>
-      </form>
+          <button className="w-[100%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition">
+            Create
+          </button>
+        </form>
+      </div>
     </div>
   )
 }

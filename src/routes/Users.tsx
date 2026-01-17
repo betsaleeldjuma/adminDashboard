@@ -83,7 +83,7 @@ const Users = () => {
       </div>
 
       <div>
-        <Link to='/users/new' className="bg-[#EEEEEE] text-[#8E1616] p-3 w-full rounded-lg">New User</Link>
+        <Link to='/users/new' className="w-[100%] p-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition">New User</Link>
       </div>
 
       {/* LIST */}
