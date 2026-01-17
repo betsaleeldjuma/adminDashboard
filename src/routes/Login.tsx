@@ -19,12 +19,12 @@ const Login = () => {
     
   return (
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-4 w-screen h-screen">
-      <div className="flex flex-col justify-center items-center gap-4 w-[80%] lg:w-[40%] h-[60%] bg-[#8E1616] rounded-lg shadow-lg">
+      <div className="card flex flex-col justify-center items-center gap-4 w-[80%] lg:w-[40%] h-[60%] bg-[#8E1616] rounded-lg shadow-lg">
         <label className="text-xl font-bold">Name:</label>
         <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="border p-2 w-[40%] rounded-sm"/>
         <label className="text-xl font-bold">Password:</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border p-2 w-[40%] rounded-sm"/>
-        <button type="submit" className="bg-[#D84040] p-2 rounded-lg  hover:shadow-[0_0_3px_#EEEEEE] w-[40%]">Login</button>
+        <button type="submit" className="w-[80%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition">Login</button>
       </div>
         
     </form>
