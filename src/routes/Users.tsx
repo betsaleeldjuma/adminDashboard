@@ -90,7 +90,7 @@ const Users = () => {
       {data.data.map((user) => (
         <div
           key={user.id}
-          className="bg-[#8E1616] text-white p-5 w-[100%] rounded flex flex-col lg:flex-row gap-2"
+          className="bg-[#8E1616] text-white p-5 w-[100%] rounded flex flex-col lg:flex-row lg:justify-evenly lg:items-center gap-2"
         >
           <img
             src={user.image || "/avatar-placeholder.png"}
@@ -105,7 +105,7 @@ const Users = () => {
           </p>
           <p className="opacity-70">{user.email}</p>
           <p className="opacity-70">Gender: {user.gender}</p>
-          <Link to={`/users/${user.id}/edit`} className="bg-[#EEEEEE] text-[#8E1616] p-3 w-full rounded-lg">Edit</Link>
+          <Link to={`/users/${user.id}/edit`} className="bg-[#EEEEEE] text-[#8E1616] p-3 rounded-lg">Edit</Link>
         </div>
       ))}
 
