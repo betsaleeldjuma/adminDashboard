@@ -114,8 +114,8 @@ const Dashboard = () => {
   }));
 
   return (
-    <div className="w-full h-screen">
-      <div className="p-6 space-y-6">
+    <div className="w-full h-screen flex justify-center items-center">
+      <div className="p-6 space-y-6 w-full">
         {/* BANNER */}
         <h1 className="text-3xl font-extrabold">ADMIN</h1>
         {/* KPI CARDS */}
