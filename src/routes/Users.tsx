@@ -7,6 +7,7 @@ import EmptyState from "../components/EmptyState"
 import Loading from "../components/Loading"
 import { Link } from "react-router"
 import { FaEdit } from "react-icons/fa"
+import { IoIosAddCircleOutline } from "react-icons/io"
 
 const Users = () => {
   const { page, limit, next, prev } = usePagination(10)
@@ -84,7 +85,8 @@ const Users = () => {
       </div>
 
       <div>
-        <Link to='/users/new' className="w-[100%] p-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition">New User</Link>
+        <Link to='/users/new' className="w-[100%] p-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition flex justify-center items-center gap-2">
+          <IoIosAddCircleOutline size={20}/><p>New User</p></Link>
       </div>
 
       {/* LIST */}
@@ -106,7 +108,7 @@ const Users = () => {
           </p>
           <p className="opacity-70">{user.email}</p>
           <p className="opacity-70">Gender: {user.gender}</p>
-          <Link to={`/users/${user.id}/edit`} className="p-4 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition">
+          <Link to={`/users/${user.id}/edit`} className="p-4 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition flex justify-center items-center gap-2">
             <FaEdit />
             <p>Edit</p>
           </Link>
