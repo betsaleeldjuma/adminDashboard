@@ -114,46 +114,48 @@ const Dashboard = () => {
   }));
 
   return (
-    <div className="p-6 space-y-6">
-      {/* BANNER */}
-      <h1 className="text-3xl font-extrabold">ADMIN</h1>
-      {/* KPI CARDS */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Link to="/users" className="card">
-          <StatCard
-            title="Total Users"
-            value={totalUsers}
-            bgColor="bg-black"
-          />
-        </Link>
-        <Link to="/orders">
-          <StatCard
-            title="Total Orders"
-            value={totalOrders}
-            bgColor="bg-black"
-          />
-        </Link>
-        <Link to="/products">
-          <StatCard
-            title="Total Products"
-            value={totalProducts}
-            bgColor="bg-black"
-          />
-        </Link>
-      </div>
+    <div className="w-full h-screen">
+      <div className="p-6 space-y-6">
+        {/* BANNER */}
+        <h1 className="text-3xl font-extrabold">ADMIN</h1>
+        {/* KPI CARDS */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Link to="/users" className="card">
+            <StatCard
+              title="Total Users"
+              value={totalUsers}
+              bgColor="bg-black"
+            />
+          </Link>
+          <Link to="/orders">
+            <StatCard
+              title="Total Orders"
+              value={totalOrders}
+              bgColor="bg-black"
+            />
+          </Link>
+          <Link to="/products">
+            <StatCard
+              title="Total Products"
+              value={totalProducts}
+              bgColor="bg-black"
+            />
+          </Link>
+        </div>
 
-      {/* GRAPHIC */}
-      <div className="card bg-[#8E1616] p-4 pb-10 rounded-xl h-55 lg:h-90 w-full">
-        <h2 className="text-white mb-4 opacity-70">Revenue by Order</h2>
+        {/* GRAPHIC */}
+        <div className="card bg-[#8E1616] p-4 pb-10 rounded-xl h-55 lg:h-90 w-full">
+          <h2 className="text-white mb-4 opacity-70">Revenue by Order</h2>
 
-        <ResponsiveContainer width="100%" height='100%'>
-          <BarChart data={chartData}>
-            <XAxis dataKey="name" stroke="#000000ff" />
-            <YAxis stroke="#000000ff" />
-            <Tooltip />
-            <Bar dataKey="total" fill="#1D1616" />
-          </BarChart>
-        </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height='100%'>
+            <BarChart data={chartData}>
+              <XAxis dataKey="name" stroke="#000000ff" />
+              <YAxis stroke="#000000ff" />
+              <Tooltip />
+              <Bar dataKey="total" fill="#1D1616" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
