@@ -4,6 +4,8 @@ import { useState } from "react"
 // import { FaUser } from "react-icons/fa"
 import IconInput from "../components/IconInput"
 import { MdEmail, MdLock, MdLogin } from "react-icons/md"
+import { FcGoogle } from "react-icons/fc"
+import { FaApple, FaFacebook } from "react-icons/fa"
 
 const UserNew = () => {
   const [form, setForm] = useState({
@@ -51,6 +53,7 @@ const UserNew = () => {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
             <IconInput
+              type="password"
               icon={<MdLock />}
               placeholder="Password"
               onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -62,6 +65,11 @@ const UserNew = () => {
               <p>Get Started</p>
             </button>
             <p className="opacity-60">Or sign in with</p>
+            <div className="flex justify-center items-center gap-4">
+              <button className="bg-white shadow-4xl rounded-lg p-5"><FcGoogle size={30}/></button>
+              <button className="bg-white shadow-4xl rounded-lg p-5"><FaFacebook className="text-blue-700"size={30}/></button>
+              <button className="bg-white shadow-4xl rounded-lg p-5"><FaApple className="text-black"size={30}/></button>
+            </div>
           </div>
         </form>
       </div>
