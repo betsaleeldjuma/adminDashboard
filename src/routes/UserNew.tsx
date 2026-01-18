@@ -57,10 +57,12 @@ const UserNew = () => {
             />
             <p className="text-end">Forgot password?</p>
           </div>
-
-          <button className="w-[90%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition flex justify-center items-center gap-2">
-            <p>Get Started</p>
-          </button>
+          <div className="w-[100%] flex flex-col justify-center items-center gap-4">
+            <button className="w-[90%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition flex justify-center items-center gap-2">
+              <p>Get Started</p>
+            </button>
+            <p className="opacity-60">Or sign in with</p>
+          </div>
         </form>
       </div>
     </div>
