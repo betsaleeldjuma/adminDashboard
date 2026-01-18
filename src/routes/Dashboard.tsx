@@ -10,6 +10,7 @@ import {
 import apiClient from "../api/apiClient";
 import { Link } from "react-router";
 import Loading from "../components/Loading";
+import { RiAdminFill } from "react-icons/ri";
 // import StatCard from "../components/StatCard";
 
 /* ==============================
@@ -117,7 +118,7 @@ const Dashboard = () => {
     <div className="w-full h-screen flex justify-center items-center">
       <div className="p-6 space-y-6 w-full">
         {/* BANNER */}
-        <h1 className="text-3xl font-extrabold">ADMIN</h1>
+        <h1 className="flex items-center gap-2 text-3xl font-extrabold"><RiAdminFill /> <p>ADMIN</p></h1>
         {/* KPI CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link to="/users" className="card">
