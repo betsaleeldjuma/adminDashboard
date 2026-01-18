@@ -35,7 +35,7 @@ const UserNew = () => {
       <div className="card p-5 max-w-2xl w-[90%] lg:w-[60%] mx-auto">
         <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-4">
           {/* HEADER */}
-          <div className="bg-white p-5 w-[15%] h-[10%] rounded-lg shadow-lg flex justify-center items-center">
+          <div className="bg-white p-5 w-[15%] h-[10%] rounded-4xl shadow-xl flex justify-center items-center">
             <MdLogin size={50}/>
           </div>
           <div className="flex flex-col justify-center items-center w-[60%]">
@@ -45,15 +45,15 @@ const UserNew = () => {
           {/* FORM */}
           <div className="w-[90%]">
             <IconInput
-              icon={<MdLock />}
-              placeholder="Password"
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-            />
-            <IconInput
               icon={<MdEmail />}
               type="email"
               placeholder="Email"
               onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
+            <IconInput
+              icon={<MdLock />}
+              placeholder="Password"
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
             <p className="text-end">Forgot password?</p>
           </div>
