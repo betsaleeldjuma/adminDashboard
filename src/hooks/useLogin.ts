@@ -1,23 +1,19 @@
-import { useMutation } from "@tanstack/react-query"
-import apiClient from "../api/apiClient"
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 interface LoginPayload {
-  username: string
-  password: string
-}
-
-
-const login = async (payload: LoginPayload) => {
-  const res = await apiClient.post("/auth/login", payload)
-  return res.data
+  username: string;
+  password: string;
 }
 
 export const useLogin = () => {
   return useMutation({
-    mutationFn: login,
-    onSuccess: (data) => {
-      localStorage.setItem('token', data.accessToken)
-      console.log('Token saved:', localStorage.getItem('token'))
-    }
-  })
-}
+    mutationFn: async (data: LoginPayload) => {
+      const res = await axios.post(
+        "https://dummyjson.com/auth/login",
+        data
+      );
+      return res.data;
+    },
+  });
+};

@@ -6,7 +6,7 @@ import ErrorState from "../components/ErrorState"
 import EmptyState from "../components/EmptyState"
 import Loading from "../components/Loading"
 import { Link } from "react-router"
-import { FaEdit } from "react-icons/fa"
+import { FaEdit, FaUser } from "react-icons/fa"
 import { IoIosAddCircleOutline } from "react-icons/io"
 
 const Users = () => {
@@ -48,7 +48,7 @@ const Users = () => {
 
   return (
     <div className="p-5 flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">USERS</h1>
+      <h1 className="text-2xl font-bold flex items-center gap-2"><FaUser size={40}/><p>USERS</p></h1>
 
       {/* SEARCH */}
       <input

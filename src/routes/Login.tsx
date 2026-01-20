@@ -1,40 +1,111 @@
-import { useState } from "react"
-import { useNavigate } from "react-router"
-import { useLogin } from "../hooks/useLogin"
-import { MdLogin } from "react-icons/md"
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { MdLogin, MdEmail, MdLock } from "react-icons/md";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook, FaApple } from "react-icons/fa";
+import IconInput from "../components/IconInput";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const loginMutation = useLogin()
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        loginMutation.mutate(
-        {username, password},
-        {onSuccess: () => navigate('/dashboard')}
-        )
-    }
-    
+  const loginMutation = useLogin();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    loginMutation.mutate(form, {
+      onSuccess: () => {
+        navigate("/dashboard");
+      },
+    });
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-4 w-screen h-screen">
-      <div className="card flex flex-col justify-center items-center gap-4 w-[90%] lg:w-[80%] h-[60%] bg-[#8E1616] rounded-lg shadow-lg">
-        <div className="bg-white p-8 lg:p-10 w-[15%] h-[10%] rounded-2xl lg:rounded-4xl shadow-xl flex justify-center items-center">
-          <MdLogin size={50}/>
-        </div>
-        <label className="text-xl font-bold">Name:</label>
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="border p-2 w-[80%] rounded-sm"/>
-        <label className="text-xl font-bold">Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border p-2 w-[80%] rounded-sm"/>
-        <button type="submit" className="w-[80%] py-3 rounded-xl bg-gradient-to-b from-zinc-800 to-black text-white font-medium shadow-lg hover:scale-[1.02] transition flex justify-center items-center gap-2">
-          <p>Login</p>
-        </button>
-      </div>
-        
-    </form>
-  )
-}
+    <div className="w-full h-screen flex justify-center items-center">
+      <div className="card p-6 max-w-2xl w-[90%] lg:w-[60%] mx-auto">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center gap-6"
+        >
+          {/* HEADER */}
+          <div className="bg-white p-5 rounded-3xl shadow-xl">
+            <MdLogin size={48} />
+          </div>
 
-export default Login
+          <div className="flex flex-col items-center text-center w-full md:w-[60%]">
+            <h1 className="font-bold text-2xl">Sign in</h1>
+            <p className="opacity-60">
+              Login with your username and password
+            </p>
+          </div>
+
+          {/* FORM */}
+          <div className="w-full md:w-[90%]">
+            <IconInput
+              icon={<MdEmail size={20} />}
+              type="text"
+              placeholder="Username"
+              value={form.username}
+              onChange={(e) =>
+                setForm({ ...form, username: e.target.value })
+              }
+            />
+
+            <IconInput
+              icon={<MdLock size={20} />}
+              type="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={(e) =>
+                setForm({ ...form, password: e.target.value })
+              }
+            />
+
+            <p className="text-right text-sm opacity-60 cursor-pointer">
+              Forgot password?
+            </p>
+          </div>
+
+          {/* ACTIONS */}
+          <div className="w-full flex flex-col items-center gap-4">
+            <button
+              type="submit"
+              disabled={loginMutation.isPending}
+              className="
+                w-[90%] py-3 rounded-xl
+                bg-gradient-to-b from-zinc-800 to-black
+                text-white font-medium shadow-lg
+                hover:scale-[1.02] transition
+                disabled:opacity-50
+              "
+            >
+              {loginMutation.isPending ? "Signing in..." : "Get Started"}
+            </button>
+
+            <p className="opacity-60">Or sign in with</p>
+
+            <div className="flex gap-4">
+              <button className="bg-white shadow-xl rounded-lg p-4">
+                <FcGoogle size={28} />
+              </button>
+              <button className="bg-white shadow-xl rounded-lg p-4">
+                <FaFacebook className="text-blue-700" size={28} />
+              </button>
+              <button className="bg-white shadow-xl rounded-lg p-4">
+                <FaApple size={28} />
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
